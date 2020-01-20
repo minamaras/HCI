@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -49,13 +52,59 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="DodajForma.xaml">
+    <Compile Include="IzaberiFormu.xaml.cs">
+      <DependentUpon>IzaberiFormu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modeli\BazaPodataka.cs" />
+    <Compile Include="Modeli\Etiketa.cs" />
+    <Compile Include="Modeli\Spomenik.cs" />
+    <Compile Include="Modeli\Tip.cs" />
+    <Compile Include="PregledEtikete.xaml.cs">
+      <DependentUpon>PregledEtikete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PregledTipa.xaml.cs">
+      <DependentUpon>PregledTipa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PregledVrste.xaml.cs">
+      <DependentUpon>PregledVrste.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Serijalizacija\SacuvajEtiketu.cs" />
+    <Compile Include="Serijalizacija\SacuvajSpomenik.cs" />
+    <Compile Include="Serijalizacija\SacuvajTip.cs" />
+    <Page Include="DodajEtiketuForma.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DodajVrstuForma.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IzaberiFormu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DodajTipForma.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -67,13 +116,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DodajForma.xaml.cs">
-      <DependentUpon>DodajForma.xaml</DependentUpon>
+    <Compile Include="DodajEtiketuForma.xaml.cs">
+      <DependentUpon>DodajEtiketuForma.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DodajVrstuForma.xaml.cs">
+      <DependentUpon>DodajVrstuForma.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DodajTipForma.xaml.cs">
+      <DependentUpon>DodajTipForma.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PregledEtikete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PregledTipa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PregledVrste.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,6 +160,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -101,5 +169,28 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\addd.png" />
+    <Resource Include="images\arrow-point-to-right.png" />
+    <Resource Include="images\delete.png" />
+    <Resource Include="images\dodaj.png" />
+    <Resource Include="images\edit.png" />
+    <Resource Include="images\garbage.png" />
+    <Resource Include="images\hash.png" />
+    <Resource Include="images\hashta.png" />
+    <Resource Include="images\information.png" />
+    <Resource Include="images\left-arrow.png" />
+    <Resource Include="images\lens.png" />
+    <Resource Include="images\mapas.gif" />
+    <Resource Include="images\move-type.png" />
+    <Resource Include="images\paris.png" />
+    <Resource Include="images\planet-earth.png" />
+    <Resource Include="images\question.png" />
+    <Resource Include="images\rightarrow.png" />
+    <Resource Include="images\slicica.png" />
+    <Resource Include="images\telescope.png" />
+    <Resource Include="images\typing.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

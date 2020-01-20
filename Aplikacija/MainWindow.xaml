@@ -3,90 +3,129 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Aplikacija"
         mc:Ignorable="d"
-        Title="Spomenik" Height="450" Width="800">
+        Title="Spomenik" Height="450" Width="800"
+        ResizeMode="NoResize"
+        Icon="images\planet-earth.png"
+        Background="#FFD7F9F2"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <DockPanel>
-            <Menu Background="#FFE5CCCC" Margin="0,0,0,394">
-                <MenuItem Header="Dodaj" FontFamily="Doppio One">
-                    <MenuItem Header="_Tip vrste" ToolTip="Klikom na ovu opciju će se otvoriti dijalog za dodavanje novog tipa ugrožene vrste."/>
-                    <MenuItem Header="_Vrstu" ToolTip="Klikom na ovu opciju će se otvoriti dijalog za dodavanje nove ugrožene vrste."/>
-                    <MenuItem Header="_Etiketu" ToolTip="Klikom na ovu opciju će se otvoriti dijalog za dodavanje nove etikete ugrožene vrste."/>
-                </MenuItem>
-                <MenuItem Header="_Pregled" FontFamily="Doppio One" >
-                    <MenuItem Header="_Tipova" ToolTip="Klikom na ovu opciju otvoriće se pregled svih tipova ugroženih vrsta."/>
-                    <MenuItem Header="_Vrsta" ToolTip="Klikom na ovu opciju otvoriće se pregled svih ugroženih vrsta."/>
-                    <MenuItem Header="_Etiketa" ToolTip="Klikom na ovu opciju otvoriće se pregled svih etiketa ugroženih vrsta."/>
-                </MenuItem>
-                <MenuItem Header="_Pomoć" ToolTip="Klikom na ovu opciju otvoriće se pomoć." FontFamily="Doppio One">
 
-                </MenuItem>
-                <MenuItem FontFamily="Doppio One" ToolTipService.ShowDuration="20000" Header="_Demo" ToolTip="Klikom na ovu opciju pokrenuće se demo za dodavanje novog tipa ugrožene vrste. &#013;Miš će se kretati automatski i biće vam onemogućeno da ga pomerate.&#013;Ukoliko želite da prekinete demo pritisnite dugme ESC u gornjem levom uglu tastature.&#013;Demo će biti prekinut nakon završenog pomeranja miša.">
-                </MenuItem>
-            </Menu>
-        </DockPanel>
-        <StackPanel Orientation="Vertical" Margin="0,21,-0.4,0">
-            <Grid Height="400" Margin="0,0,-0.4,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="109*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition Height="0*" />
-                </Grid.RowDefinitions>
-                <!--leva strana-->
-                <Canvas Grid.Column="0" Margin="0,0,0,-1" Grid.RowSpan="3">
-                    <Canvas.Background>
-                        <SolidColorBrush Color="White"></SolidColorBrush>
-                    </Canvas.Background>
-                </Canvas>
-                <GridSplitter Height="401" VerticalAlignment="Top" Width="5" Margin="0,0,0,-1" Grid.RowSpan="3"/>
-                <!--desna strana-->
-                <Canvas Margin="0,0,-0.4,0" Grid.Column="1" Grid.ColumnSpan="3">
-                    <Image Source="images/mapa.gif" Width="594" Height="400"></Image>
-                </Canvas>
+        <Menu Background="#FF5245AD" Foreground="white" Margin="0,0,-0.4,381">
+            <MenuItem Header="Dodaj" FontFamily="Doppio One" Background="#FF5245AD" Foreground="white">
+                <MenuItem Header="Tip vrste" Click="DodajTipMenu_Click" Background="#FF5245AD" Foreground="white"/>
+                <MenuItem Header="Vrstu" Click="DodajVrstuMenu_Click" Background="#FF5245AD" Foreground="white"/>
+                <MenuItem Header="Etiketu" Background="#FF5245AD" Foreground="white" Click="DodajEtiketuButton_Click" />
+            </MenuItem>
+            <MenuItem Header="Pregled" FontFamily="Doppio One" Background="#FF5245AD" Foreground="white" >
+                <MenuItem Header="Tipova" x:Name="PregledTipa" Click="PregledTipa_Click" Background="#FF5245AD" Foreground="white"/>
+                <MenuItem Header="Vrsta" x:Name="PregledVrste" Click="PregledVrste_Click" Background="#FF5245AD" Foreground="white"/>
+                <MenuItem Header="Etiketa" x:Name="PregledEtikete" Click="PregledEtikete_Click" Background="#FF5245AD" Foreground="white"/>
+            </MenuItem >
+            <MenuItem Header="Sacuvaj" FontFamily="Doppio One" Background="#FF5245AD" Foreground="white" Name="Sacuvaj" Click="Sacuvaj_Click">
 
-                <StackPanel Grid.Column="1"  Margin="35,329,103.6,0" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Center" >
-                    <DockPanel>
-                        <Border  Background="#FF868057" BorderThickness="2" DockPanel.Dock="Top" Height="62" Margin="5 5 5 5" Width="144" CornerRadius="6">
-                            <StackPanel>
-                                <TextBlock HorizontalAlignment="Center"  FontSize="14"  Margin="2 2 2 2" FontFamily="Doppio One" Foreground="White">Tip</TextBlock>
-                                <Button x:Name="DodajTipButton" Margin="5 5 5 5"  ToolTip="Klikom na dugme će se otvoriti dijalog za dodavanje nove ugrožene vrste" FontFamily="Century Gothic" Click="DodajTip_Click">
-                                    <Image  Source="images\add.png" Height="22" Width="21"></Image>
-                                </Button>
+            </MenuItem>
+            <MenuItem Header="Ucitaj" FontFamily="Doppio One" Background="#FF5245AD" Foreground="white" Name="Ucitaj" Click="Ucitaj_Click">
 
-                            </StackPanel>
-                        </Border>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="25" />
-                    </DockPanel>
-                    <DockPanel>
-                        <Border  Background="#FF868057" BorderThickness="2" DockPanel.Dock="Top" Height="62" Margin="5 5 5 5" Width="144" CornerRadius="6">
-                            <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontFamily="Doppio One" FontSize="14"  Margin="2 2 2 2" Foreground="White">Vrsta</TextBlock>
-                                <Button x:Name="dodajVrstuButton" Margin="5 5 5 5" ToolTip="Klikom na dugme će se otvoriti dijalog za dodavanje novog tipa ugrožene vrste" FontFamily="Century Gothic" FontSize="12">
-                                    <Image Source="images\add.png" Height="22" Width="21"></Image>
-                                </Button>
-                            </StackPanel>
 
-                        </Border>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="25" />
-                    </DockPanel>
-                    <DockPanel>
-                        <Border Background="#FF868057" BorderThickness="2" DockPanel.Dock="Top" Height="61" Margin="5 5 5 5" CornerRadius="6">
-                            <StackPanel Margin="0,0.4,0,-2.6" Width="133">
-                                <TextBlock HorizontalAlignment="Center" FontFamily="Doppio One" FontSize="14" Margin="2 2 2 2" Foreground="White">Etiketa</TextBlock>
-                                <Button  x:Name="dodajEtiketuButton" Margin="10,5,4.8,5"  ToolTip="Klikom na dugme će se otvoriti dijalog za dodavanje nove etikete ugrožene vrste" FontFamily="Century Gothic" FontSize="12" Height="22">
-                                    <Image Source="images\add.png" Height="22" Width="21"></Image>
-                                </Button>
-                            </StackPanel>
-                        </Border>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="25" />
-                    </DockPanel>
-                </StackPanel>
-            </Grid>
-        </StackPanel>
+
+            </MenuItem>
+
+
+        </Menu>
+
+
+        <Grid Margin="0,10,-0.4,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="27*"/>
+                <ColumnDefinition Width="566*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="0*" />
+            </Grid.RowDefinitions>
+            <!--leva strana-->
+            <Canvas Grid.Column="0" Margin="0,10,5,-1" Grid.RowSpan="3">
+                <Canvas.Background>
+                    <SolidColorBrush Color="#FFD6CFF9"></SolidColorBrush>
+                </Canvas.Background>
+                <DataGrid PreviewMouseLeftButtonDown="TabelaSpomenika_PreviewMouseLeftButtonDown" x:Name="tabelaSpomenika" BorderBrush="#FF5245AD" BorderThickness="2.6"  ItemsSource="{Binding Path=Spomenici}" AutoGenerateColumns="False"  Height="245" Width="195" SelectionChanged="TabelaSpomenika_SelectionChanged">
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Oznaka" IsReadOnly="True" Width="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="Wrap" TextAlignment="Left" MaxWidth="50" Width="50" Text="{Binding Oznaka}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Foto" Width="60" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="32" Height="32" Source="{Binding Ikonica}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Image x:Name="prikaz" Height="98" Width="97" Canvas.Left="50" Canvas.Top="250" MouseMove="Image_MouseMove" PreviewMouseLeftButtonDown="Image_PreviewMouseLeftButtonDown">
+
+                </Image>
+
+                <Button Background="#FF5245AD" FontFamily="Century Gothic" Foreground="White" Name="ObrisiSaMape" Click="ObrisiSaMape_Click" Canvas.Left="74" Canvas.Top="371" Height="20" Width="48">Obrisi</Button>
+
+            </Canvas>
+            <GridSplitter Height="381" VerticalAlignment="Top" Width="5" Margin="0,20,0,-1" Grid.RowSpan="3" Background="#FF5245AD"/>
+            <!--desna strana-->
+            <Canvas Margin="5,10,-0.4,86" Grid.Column="1" Background="#FFD7F9F2" x:Name="mapa" AllowDrop="True" DragEnter="Mapa_DragEnter" Drop="Mapa_Drop" Grid.ColumnSpan="2">
+                <Image Source="images\mapas.gif" Width="594" Height="294" Canvas.Top="10"/>
+            </Canvas>
+
+            <StackPanel Grid.Column="2"  Margin="7.8,319,103.6,10" Orientation="Horizontal" HorizontalAlignment="Center" Width="455" >
+
+                <Border  Background="#FF5245AD" BorderThickness="2" Height="62" Margin="5 5 5 5" Width="144" CornerRadius="4">
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center"  FontSize="18"  Margin="2 2 2 2" FontFamily="Doppio One" Foreground="White">Tip</TextBlock>
+                        <Button BorderThickness="0" x:Name="DodajTipButton" Margin="5 5 5 5" FontFamily="Century Gothic" Click="DodajTip_Click" Background="#FF5245AD" >
+                            <Image Name="addbtn" Source="images\addd.png" Height="22" Width="21"></Image>
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" Height="25" />
+
+                <Border  Background="#FF5245AD" BorderThickness="2" Height="62" Margin="5 5 5 5" Width="144" CornerRadius="4">
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center" FontFamily="Doppio One" FontSize="18"  Margin="2 2 2 2" Foreground="White">Vrsta</TextBlock>
+                        <Button BorderThickness="0" x:Name="dodajVrstuButton" Margin="5 5 5 5" FontFamily="Century Gothic" FontSize="12" Click="DodajVrstu_Click" Background="#FF5245AD">
+                            <Image Source="images\addd.png" Height="22" Width="21"></Image>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" Height="25" />
+                <Border Background="#FF5245AD" BorderThickness="2" Height="61" Margin="5 5 5 5" CornerRadius="4">
+                    <StackPanel Margin="0,0.4,0,-2.6" Width="133">
+                        <TextBlock HorizontalAlignment="Center" FontFamily="Doppio One" FontSize="18" Margin="2 2 2 2" Foreground="White">Etiketa</TextBlock>
+                        <Button BorderThickness="0" x:Name="dodajEtiketuButton" Margin="5 5 5 5"  FontFamily="Century Gothic" Background="#FF5245AD" FontSize="12" Height="22" Click="DodajEtiketuButton_Click">
+                            <Image Source="images\addd.png" Height="22" Width="21"></Image>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" Height="25"/>
+            </StackPanel>
+            <TextBlock FontSize="16" FontFamily="Century Gothic" FontWeight="Medium" Margin="488.8,20,10.6,360" Grid.Column="2">Pregled</TextBlock>
+            <Button BorderThickness="0" Margin="470.8,40,0.6,305" Grid.Column="2" Background="#FFD7F9F2" x:Name="IzaberiBtn" Click="IzaberiBtn_Click">
+                <Image Source="images\telescope.png" Height="55" Width="69"></Image>
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>

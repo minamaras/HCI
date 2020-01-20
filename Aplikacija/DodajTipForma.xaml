@@ -1,0 +1,86 @@
+﻿<Window x:Class="Aplikacija.DodajTipForma"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Aplikacija"
+        mc:Ignorable="d"
+        Title="Tip spomenika" Height="458.353" Width="572.39"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Background="#FFD7F9F2">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="249*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="22*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="17*" />
+            <RowDefinition Height="55*" />
+            <RowDefinition Height="55*" />
+            <RowDefinition Height="51*" />
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="101*" />
+            <RowDefinition Height="66*" />
+        </Grid.RowDefinitions>
+        <!--Text blokovi-->
+
+        <ToolBar Margin="0,0,207.2,46.4" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <Button HorizontalAlignment="Stretch" VerticalAlignment="center" x:Name="HelpTip">
+                <Image Source="images\question.png" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+            </Button>
+        </ToolBar>
+
+        <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="63.6,22.6,104.2,21.6" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" ToolTip="Zvezdica (*) označava da je obavezno popuniti polje." Height="23" Width="81">Oznaka*:</TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="63.6,22.4,121.2,21.8" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" ToolTip="Zvezdica (*) označava da je obavezno popuniti polje." Height="23" Width="64">Ime*:</TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="63.6,39.2,122.2,38.6" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="23" Width="63" Grid.RowSpan="2">Opis:</TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="63.6,39.4,109.2,38.4" FontFamily="Century Gothic" FontSize="18" FontWeight="Bold" Height="23" Width="76">Ikonica:</TextBlock>
+
+        <!--Buttons-->
+        <Button Grid.Column="2" Grid.Row="7" Width="98" HorizontalAlignment="Right" Margin="0,20.6,0.2,9.8" FontFamily="Century Gothic" FontWeight="DemiBold" FontSize="13"  x:Name="DodajButton" Click="DodajButton_Click" Background="#FF5245AD" Foreground="White" MouseEnter="hoverDodaj" MouseLeave="otpustiDodaj" >Dodaj</Button>
+        <Button MouseEnter="OdustaniButton_MouseEnter" MouseLeave="OdustaniButton_MouseLeave" Grid.Column="4" Grid.Row="7" Width="98" Background="#FF5245AD" Foreground="White" HorizontalAlignment="Left" Margin="0.4,20.6,0,9.8" FontFamily="Century Gothic" FontWeight="DemiBold" FontSize="13" x:Name="OdustaniButton" Click="OdustaniButton_Click" >Odustani</Button>
+
+        <!--Text Blokovi-->
+        <TextBox LostFocus="Oznaka_LostFocus" BorderThickness="3" BorderBrush="#FF5245AD" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" Margin="195.6,10,152,9.4" RenderTransformOrigin="0.497,0.714" Background="White" Name="Oznaka" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <Binding Path="Oznaka" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="4" Grid.Row="2" Margin="120.4,15,10,17.4" FontFamily="Century Gothic" FontWeight="Medium" Foreground="Red" Name="ValOznaka" Visibility="Hidden">Obavezno polje</TextBlock>
+
+        <TextBox LostFocus="Ime_LostFocus" BorderThickness="3" BorderBrush="#FF5245AD" Grid.Column="2" Grid.Row="3" Name="Ime" HorizontalAlignment="Stretch" Margin="195.6,15.6,152,3.8" RenderTransformOrigin="0.497,0.714" Background="White" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged"></Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Name="ValIme" Visibility="Hidden" Grid.Column="4" Grid.Row="3" Margin="120.4,15,10,17.4" FontFamily="Century Gothic" FontWeight="Medium" Foreground="Red">Obavezno polje</TextBlock>
+
+        <!--Ikonica-->
+        <Grid Grid.Column="2" Grid.Row="6" Margin="195.6,9.8,76,63.8" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Name="img" Margin="5" Stretch="Fill" Grid.Column="0" />
+            <StackPanel  Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 20" VerticalAlignment="Bottom">
+                <Button MouseLeave="BtnOdaberi_MouseLeave" MouseEnter="BtnOdaberi_MouseEnter" Background="#FF5245AD" Foreground="White" FontFamily="Century Gothic" FontWeight="Bold" Margin="0 0 0 5" Name="btnOdaberi" Width="75" Click="BtnIzaberi_Click">Izaberi</Button>
+                <Button MouseLeave="BtnOdbaci_MouseLeave" MouseEnter="BtnOdbaci_MouseEnter" Background="#FF5245AD" Foreground="White" FontFamily="Century Gothic" FontWeight="Bold" x:Name="btnOdbaci" Width="75" Click="BtnOdbaci_Click" >Odbaci</Button>
+            </StackPanel>
+
+        </Grid>
+        <ScrollViewer Margin="195.6,27.2,152,0.2" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Stretch" Name="xOpisScroll" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <TextBox BorderThickness="3" BorderBrush="#FF5245AD"  Name="Opis" AcceptsReturn="True">
+                <TextBox.Text>
+                    <Binding Path="Opis" UpdateSourceTrigger="PropertyChanged"></Binding>
+                </TextBox.Text>
+            </TextBox>
+        </ScrollViewer>
+
+    </Grid>
+</Window>
